@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Weather App</title>
+
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <main id="app" class="app">
+
+    <!-- HEADER -->
+    <header class="topbar">
+      <div class="brand">
+        <div class="brand-title">🌤 Weather</div>
+      </div>
+
+      <div class="controls">
+        <button id="unitToggle" class="chip">°C</button>
+      </div>
+    </header>
+
+    <!-- SEARCH BAR -->
+    <section class="search-wrap">
+      <div class="search-card">
+        <input id="cityInput" type="search" placeholder="Search city…" />
+        <button id="searchBtn" class="search-btn">Search</button>
+      </div>
+      <p id="errorText" class="error"></p>
+    </section>
+
+    <!-- WEATHER MAIN CARD -->
+    <!-- note: increased max-width inline so it's visibly wider until you send CSS -->
+    <section id="weatherResult" class="weather-card" aria-hidden="true" style="max-width:920px;margin:0 auto;">
+
+      <!-- TOP CITY + TEMP AREA -->
+      <div class="city-block">
+        <div class="city-left">
+          <div id="cityBig" class="city-big">—</div>
+          <div id="citySmall" class="city-small">—</div>
+        </div>
+
+        <div class="temp-center">
+          <div id="tempLarge" class="temp-large">—°C</div>
+          <div id="conditionText" class="condition-text">—</div>
+          <div id="rangeLine" class="range-line">— ~ —</div>
+          <div id="feelsLine" class="feels-line">Feels like —</div>
+        </div>
+
+        <div class="city-icon">
+          <img id="weatherIcon" width="100" height="100" alt="icon" />
+        </div>
+      </div>
+
+      <!-- HOURLY FORECAST -->
+      <div class="hourly-section">
+        <h3 class="section-title">Hourly Forecast — next 12 hours</h3>
+        <div id="hourlyList" class="hourly-row"></div>
+      </div>
+
+
+     
+      <!-- 12 DAY FORECAST -->
+      <div class="days12-section">
+        <h3 class="section-title">12-Day Forecast</h3>
+        <div id="days12Grid" class="days12-grid"></div>
+      </div>
+
+      <!-- SIX METRIC CARD -->
+      <div class="metrics-card">
+        <div class="metrics-grid">
+
+          <div class="metric-item">
+            <div class="metric-icon">🌡</div>
+            <div class="metric-label">Feels Like</div>
+            <div id="mFeels" class="metric-value">—</div>
+          </div>
+
+          <div class="metric-item">
+            <div class="metric-icon">💨</div>
+            <div class="metric-label">Wind</div>
+            <div id="mWind" class="metric-value">—</div>
+          </div>
+
+          <div class="metric-item">
+            <div class="metric-icon">💧</div>
+            <div class="metric-label">Humidity</div>
+            <div id="mHumidity" class="metric-value">—</div>
+          </div>
+
+          <div class="metric-item">
+            <div class="metric-icon">🌞</div>
+            <div class="metric-label">UV Index</div>
+            <div id="mUV" class="metric-value">—</div>
+          </div>
+
+          <div class="metric-item">
+            <div class="metric-icon">👁</div>
+            <div class="metric-label">Visibility</div>
+            <div id="mVisibility" class="metric-value">—</div>
+          </div>
+
+          <div class="metric-item">
+            <div class="metric-icon">🔽</div>
+            <div class="metric-label">Pressure</div>
+            <div id="mPressure" class="metric-value">—</div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- SUNRISE / SUNSET -->
+      <div class="sun-card">
+  <div class="sun-arc">
+    <div class="sun-marker sunrise"></div>
+    <div class="sun-marker sunset"></div>
+  </div>
+  <div class="sun-labels">
+    <div class="sun-time">
+      <div class="sun-label">Sunrise</div>
+      <div id="sunrise" class="sun-value">—</div>
+    </div>
+    <div class="sun-time right">
+      <div class="sun-label">Sunset</div>
+      <div id="sunset" class="sun-value">—</div>
+    </div>
+  </div>
+</div>
+
+      <!-- BOTTOM BUTTONS -->
+      <div class="card-actions">
+        <button id="refreshBtn" class="btn small">Refresh</button>
+       
+      </div>
+
+    </section>
+
+    <!-- EMPTY STATE -->
+    <section id="emptyState" class="empty">
+      <div class="empty-illustration">🌤</div>
+      <h2>Search a city to see weather</h2>
+    </section>
+
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

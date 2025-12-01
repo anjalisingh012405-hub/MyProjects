@@ -1,0 +1,384 @@
+:root{
+  --bg: #f3f6fb;
+  --surface: #ffffff;
+  --muted: #6b7280;
+  --primary-500: #2563eb; /* blue */
+  --primary-400: #3b82f6;
+  --accent: #06b6d4;
+  --shadow: 0 10px 30px rgba(16,24,40,0.08);
+  --card-radius: 16px;
+  --gap: 14px;
+  --glass: rgba(255,255,255,0.6);
+  font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  color-scheme: light;
+}
+
+/* reset */
+*{box-sizing:border-box}
+html,body,#app{height:100%}
+body{
+  margin:0;
+  background:
+    radial-gradient(1200px 600px at 10% 10%, rgba(59,130,246,0.06), transparent),
+    radial-gradient(900px 400px at 90% 90%, rgba(6,182,212,0.03), transparent),
+    var(--bg);
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  color:#0f172a;
+  padding:0;
+  font-size:16px;
+  line-height:1.25;
+}
+
+/* container / main */
+main.app{
+  padding-bottom:32px;
+  min-height:100vh;
+}
+
+/* Topbar */
+.topbar{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:18px 16px;
+  gap:12px;
+}
+.brand-title{
+  font-weight:700;
+  font-size:18px;
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+.controls .chip{
+  background:linear-gradient(90deg,var(--primary-400),var(--accent));
+  color:white;
+  border-radius:999px;
+  padding:6px 10px;
+  font-weight:700;
+  border:0;
+  box-shadow:0 6px 18px rgba(59,130,246,0.12);
+  cursor:pointer;
+}
+
+/* Search */
+.search-wrap{padding:0 16px 12px}
+.search-card{
+  display:flex;
+  gap:8px;
+  align-items:center;
+  background:var(--surface);
+  border-radius:12px;
+  padding:10px;
+  box-shadow:var(--shadow);
+  position:relative;
+}
+.search-card input{
+  border:0;outline:0;font-size:16px;padding:8px 6px;flex:1;background:transparent;
+}
+.search-btn{
+  background:linear-gradient(90deg,var(--primary-400),var(--accent));
+  border:0;color:#fff;padding:10px 14px;border-radius:10px;font-weight:700;
+  cursor:pointer;
+  box-shadow:0 6px 16px rgba(59,130,246,0.08);
+}
+.error{color:#d9534f;margin:8px 12px 0;font-size:13px}
+
+/* AUTOCOMPLETE */
+.suggestion-box{
+  position:absolute;
+  top:100%;
+  left:0;
+  right:0;
+  background:#fff;
+  border:1px solid rgba(15,23,42,0.06);
+  border-radius:10px;
+  margin-top:8px;
+  box-shadow:0 8px 30px rgba(2,6,23,0.06);
+  max-height:220px;
+  overflow-y:auto;
+  z-index:999;
+}
+.suggestion-item{
+  padding:12px 14px;
+  cursor:pointer;
+  font-size:15px;
+  border-bottom:1px solid #f3f4f6;
+  color:#0f172a;
+}
+.suggestion-item:last-child{border-bottom:0}
+.suggestion-item:hover{background:#f8fafc}
+
+/* WEATHER CARD (main container) */
+.weather-card{
+  margin:14px;
+  background:var(--surface);
+  border-radius:18px;
+  padding:16px;
+  box-shadow:var(--shadow);
+  border:1px solid rgba(15,23,42,0.04);
+}
+
+/* CITY & PRIMARY ROW (large left city, center temp, right icon) */
+.city-block{
+  display:flex;
+  gap:12px;
+  align-items:center;
+}
+.city-left{
+  flex:1;
+  min-width:0;
+}
+.city-big{
+  font-size:22px;
+  font-weight:800;
+  color:#0b1220;
+  line-height:1;
+}
+.city-small{
+  font-size:13px;
+  color:var(--muted);
+  margin-top:6px;
+}
+
+/* center temp */
+.temp-center{
+  flex:1;
+  text-align:center;
+}
+.temp-large{
+  font-size:56px;
+  font-weight:800;
+  color:var(--primary-500);
+  line-height:1;
+}
+.condition-text{
+  font-size:14px;
+  color:var(--muted);
+  margin-top:6px;
+}
+.range-line{
+  margin-top:8px;
+  font-size:13px;
+  color:var(--muted);
+}
+.feels-line{
+  margin-top:4px;
+  font-size:13px;
+  color:var(--muted);
+}
+
+/* right icon */
+.city-icon{
+  width:110px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.city-icon img{
+  width:92px;height:92px;
+}
+
+/* HOURLY STRIP */
+.hourly-section{margin-top:18px}
+.section-title{margin:0 6px 8px;font-size:14px;color:var(--muted);font-weight:700}
+.hourly-row{
+  display:flex;
+  gap:10px;
+  overflow-x:auto;
+  padding:6px 6px 10px;
+  -webkit-overflow-scrolling:touch;
+}
+.hour-item{
+  min-width:74px;
+  background:linear-gradient(180deg,#fff,#fbfdff);
+  border-radius:12px;
+  padding:8px;
+  text-align:center;
+  font-size:13px;
+  box-shadow:0 6px 18px rgba(2,6,23,0.03);
+}
+.hour-item img{display:block;margin:6px auto;width:36px;height:36px}
+
+/* YTT TABS (Yesterday / Today / Tomorrow) */
+.ytt-tabs{
+  display:flex;
+  gap:8px;
+  margin-top:16px;
+  padding:4px;
+}
+.ytt-tab{
+  flex:1;
+  background:rgba(59,130,246,0.06);
+  border:0;
+  padding:8px 10px;
+  border-radius:10px;
+  font-weight:700;
+  color:var(--primary-500);
+  cursor:pointer;
+}
+.ytt-tab.active{
+  background:linear-gradient(90deg,var(--primary-400),var(--accent));
+  color:#fff;
+  box-shadow:0 8px 18px rgba(59,130,246,0.12);
+}
+
+/* 12-DAY GRID */
+.days12-section{margin-top:12px}
+.days12-grid{
+  display:flex;
+  gap:10px;
+  overflow-x:auto;
+  padding:8px 0 12px;
+}
+.day-card{
+  min-width:92px;
+  background:rgba(15,23,42,0.03);
+  border-radius:12px;
+  padding:8px;
+  text-align:center;
+  font-size:13px;
+}
+
+/* METRICS CARD (6 items) */
+.metrics-card{
+  margin-top:16px;
+  background:linear-gradient(180deg, #fff, #fbfdff);
+  padding:12px;
+  border-radius:12px;
+  box-shadow:0 8px 24px rgba(2,6,23,0.04);
+}
+.metrics-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:10px;
+}
+.metric-item{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:6px;
+  padding:8px;
+  background:rgba(15,23,42,0.02);
+  border-radius:10px;
+  font-size:13px;
+}
+.metric-icon{font-size:20px}
+.metric-label{color:var(--muted);font-size:12px}
+.metric-value{font-weight:700;color:#0b1220}
+
+/* SUN CARD */
+.sun-card {
+  margin-top: 14px;
+  background: var(--surface);
+  border-radius: 12px;
+  padding: 20px 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 6px 20px rgba(2,6,23,0.03);
+}
+
+/* arc */
+.sun-arc {
+  position: relative;
+  width: 100%;
+  max-width: 320px;
+  height: 160px;
+  border-top-left-radius: 160px;
+  border-top-right-radius: 160px;
+  border: 3px solid #fdd835; /* golden arc */
+  border-bottom: none;
+}
+
+/* markers */
+.sun-marker {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  background: #ff9800;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  box-shadow: 0 0 10px rgba(255,152,0,0.8);
+}
+
+.sun-marker.sunrise {
+  left: -7px;   /* half of marker width */
+  bottom: 0;
+}
+
+.sun-marker.sunset {
+  right: -7px;
+  bottom: 0;
+}
+
+/* labels */
+.sun-labels {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 320px;
+  margin-top: 12px;
+}
+
+.sun-time {
+  text-align: left;
+}
+
+.sun-time.right {
+  text-align: right;
+}
+
+.sun-label {
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.sun-value {
+  font-weight: 700;
+  color: #0b1220;
+}
+
+
+/* ACTIONS */
+.card-actions{display:flex;gap:8px;justify-content:flex-end;margin-top:12px}
+.btn{
+  padding:8px 12px;border-radius:10px;border:0;font-weight:700;cursor:pointer;background:var(--primary-500);color:#fff;
+  box-shadow:0 6px 18px rgba(37,99,235,0.12);
+}
+.btn.ghost{background:transparent;border:1px solid rgba(15,23,42,0.06);color:var(--primary-500)}
+.btn.small{padding:8px 12px;font-size:14px}
+
+/* EMPTY STATE */
+.empty{margin:40px 16px;text-align:center;color:var(--muted)}
+.empty-illustration{font-size:48px;margin-bottom:10px}
+
+/* FOOTER */
+.footer{text-align:center;padding:18px;color:var(--muted);font-size:12px}
+
+/* responsiveness */
+@media (min-width:720px){
+  .weather-card{max-width:720px;margin:16px auto}
+  .days12-grid{justify-content:flex-start}
+  .hour-item{min-width:86px}
+  .temp-large{font-size:72px}
+  .city-big{font-size:26px}
+}
+
+/* subtle transitions */
+.suggestion-item, .hour-item, .day-card, .metric-item {transition: transform .12s ease, box-shadow .12s ease}
+.suggestion-item:active, .hour-item:active, .day-card:active, .metric-item:active {transform: translateY(1px)}
+
+/* tiny scrollbar style */
+.suggestion-box::-webkit-scrollbar,
+.hourly-row::-webkit-scrollbar,
+.days12-grid::-webkit-scrollbar {height:8px;width:8px}
+.suggestion-box::-webkit-scrollbar-thumb,
+.hourly-row::-webkit-scrollbar-thumb,
+.days12-grid::-webkit-scrollbar-thumb {background:rgba(2,6,23,0.06);border-radius:999px}
+
+
